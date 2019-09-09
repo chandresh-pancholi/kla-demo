@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package com.grpc.proto.v0;
+
+import "google/protobuf/empty.proto";
+
+option java_package = "com.kla.demo.java.dto.v0";
+option java_outer_classname = "KLAProto";
+
+service KLAService {
+    rpc CreateSessionDetail(CreateSessionDetailRequest) returns (CreateSessionDetailResponse);
+    rpc GetSessionDetails(google.protobuf.Empty) returns (stream CreateSessionDetailRequest);
+    rpc CreateSessionInBulk(stream CreateSessionDetailRequest) returns (stream CreateSessionDetailResponse);
+}
+
+message CreateSessionDetailRequest {
+    string name = 1;
+    string talk = 2;
+    string abstract = 3;
+    int64 talkTime = 4;
+}
+
+message CreateSessionDetailResponse {
+}
+
+message GetSessionDetailsRequest {
+
+}
+
+message GetSessionDetailsResponse {
+    repeated CreateSessionDetailRequest createSessionDetailRequest= 1;
+}
